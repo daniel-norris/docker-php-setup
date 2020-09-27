@@ -1,0 +1,69 @@
+version: '3.2'
+
+services:
+
+    app:
+        build:
+            context: ./docker/app
+            dockerfile: Dockerfile
+        image: norrisdan/php:latest
+        networks:
+            - laravelnet
+        volumes:
+            - .:/var/www/html
+        ports:
+            - 8080:80
+        working_dir: /var/www/html
+
+    cache:
+        image: redis:alpine
+        networks:
+            - laravelnet
+        volumes:
+            - cachedata:/data
+
+    db:
+        image: mysql:5.7
+        environment:
+            MYSQL_ROOT_PASSWORD: # pass for root user
+            MYSQL_DATABASE: # database name
+            MYSQL_USER: # username
+            MYSQL_PASSWORD: # password
+        ports:
+            - ${DB_PORT}:3306
+        networks:
+            - laravelnet
+        volumes:
+            - dbdata:/var/lib/mysql
+
+    node:
+        build:
+            context: ./docker/node
+            dockerfile: Dockerfile
+        image: norrisdan/node:latest
+        networks:
+            - laravelnet
+        volumes:
+            - .:/opt
+        working_dir: /opt
+        command: echo hi
+
+    phpmyadmin:
+        image: phpmyadmin
+        restart: always
+        ports:
+            - 8090:80
+        environment:
+            - PMA_HOST=db
+        networks:
+            - laravelnet
+
+networks:
+    laravelnet:
+        driver: bridge
+
+volumes:
+    dbdata:
+        driver: local
+    cachedata:
+        driver: local
