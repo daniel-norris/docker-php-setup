@@ -1,5 +1,9 @@
 # DOCKER LEMP SETUP - LIGHTNING INSTALL
 
+Setup a complete containerised LEMP environment complete with Node and Redis containers for your front end and caching requirements in less than 5 minutes. Built these Docker images and uploaded to make publicly available along with shell scripts to simply the workflow for new users. 
+
+This will accompany a new blog article coming soon. 
+
 1. git clone git@github.com:daniel-norris/docker-php-setup.git <project>
 2. open the `docker-compose.yml` file and fill out the values for:
     ```bash
