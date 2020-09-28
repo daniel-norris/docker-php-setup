@@ -5,6 +5,7 @@ Setup a complete containerised LEMP environment complete with Node and Redis con
 This will accompany a new blog article coming soon. 
 
 1. git clone git@github.com:daniel-norris/docker-php-setup.git <project>
+2. `cd <project>` and run `chmod +x develop` to make the shell script executable 
 2. open the `docker-compose.yml` file and fill out the values for:
     ```bash
     MYSQL_ROOT_PASSWORD: # pass for root user
