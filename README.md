@@ -25,5 +25,18 @@
     DB_USERNAME=<yourusername>
     DB_PASSWORD=<yourpassword>
     ```
-7. this is a good opportunity to change your root password for MySQL
-8. then run `./develop art migrate`
+7. change your root MySQL password here. Run `docker ps` and take not of the container id for the MySQL5.7 container 
+8. run a bash shell on that container `docker exec -it <containerid> bash`
+9. login MySQL `mysql -u root -p` when prompted enter the original root password you set in the `docker-compose.yml` file 
+10. once you've successfully logged in then alter the root record by running: 
+    ```bash
+    FLUSH PRIVILEGES; 
+    ALTER USER 'root'@'localhost' IDENTIFIED BY '<newrootpassword>'; 
+    exit
+10. then run `./develop art migrate`
+11. `./develop npm install` and `./develop npm run dev --watch`
+12. now go to localhost:8080 and localhost:8090 for your laravel app and phpmyadmin client respectively 
+    
+When ever you want to launch your project, all you now need to to do is run ./develop start and ./develop stop when you are done. You can replicate these instructions for every new project you want to run, Docker only needs the build the images once and later caches these for faster installations. 
+
+
