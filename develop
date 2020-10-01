@@ -10,14 +10,14 @@ if [ $# -gt 0 ]; then
 
     elif [ "$1" == "install" ]; then
         docker run --rm -it -v $(pwd):/var/www/html -w /var/www/html \
-        shippingdocker/app:latest \
+        norrisdan/php:latest \
         bash -c "composer create-project laravel/laravel application \
         && mv application/* ./ \
         && mv application/.* ./"
 
     elif [ "$1" == "clean" ]; then
         docker run --rm -it -v $(pwd):/var/www/html -w /var/www/html \
-        shippingdocker/app:latest \
+        norrisdan/php:latest \
         bash -c "rm -rf application/"
 
     elif [ "$1" == "artisan" ] || [ "$1" == "art" ]; then
